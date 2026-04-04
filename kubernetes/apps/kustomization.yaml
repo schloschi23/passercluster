@@ -1,0 +1,10 @@
+# kubernetes/apps/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cert-manager/ks.yaml
+  - default/ks.yaml
+  - flux-system/ks.yaml
+  - kube-system/ks.yaml
+  - network/ks.yaml
+  - storage/ks.yaml # Das ist der Verweis auf Longhorn & Co.
