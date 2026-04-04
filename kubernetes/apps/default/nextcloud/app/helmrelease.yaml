@@ -1,0 +1,45 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nextcloud
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: nextcloud
+      version: "5.x.x" # You can pin to a specific chart version
+      sourceRef:
+        kind: HelmRepository
+        name: nextcloud
+  values:
+    ingress:
+      enabled: true
+      className: "nginx" # Adjust to your ingress controller (e.g. gateway api, traefik, or nginx)
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production" # Assuming you use cert-manager
+      path: /
+      pathType: Prefix
+
+    # Core Nextcloud configurations
+    nextcloud:
+      host: "nextcloud.yourdomain.com"
+      username: "admin"
+      password: "change-this-password" # Best practice: use Flux substitution like ${NEXTCLOUD_ADMIN_PASSWORD}
+
+    # Storage for user data
+    persistence:
+      enabled: true
+      existingClaim: "" # Or provide an existing PVC name like you did with immich-library-pvc
+      size: 50Gi
+
+    # Database configuration (defaults to a built-in MariaDB pod)
+    mariadb:
+      enabled: true
+      primary:
+        persistence:
+          enabled: true
+          size: 8Gi
+
+    # Optionally enable redis for caching
+    redis:
+      enabled: true

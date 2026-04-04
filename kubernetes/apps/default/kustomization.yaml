@@ -10,3 +10,4 @@ resources:
   - ./namespace.yaml
   - ./echo/ks.yaml
   - ./immich/ks.yaml
+  - ./nextcloud/ks.yaml
