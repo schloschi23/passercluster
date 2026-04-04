@@ -18,12 +18,14 @@ spec:
       DB_PASSWORD: "immich-secret"
       DB_DATABASE_NAME: "immich"
       REDIS_HOSTNAME: "immich-redis-master"
-
+      IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"
     ingress:
       main:
         enabled: false
 
     immich:
+      podSecurityContext:
+        fsGroup: 1000
       persistence:
         library:
           existingClaim: "immich-library-pvc"
