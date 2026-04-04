@@ -5,7 +5,7 @@ metadata:
   namespace: storage
 spec:
   parentRefs:
-    - name: envoy-internal # Wir nehmen internal, falls du es nur im Heimnetz willst
+    - name: envoy-external # Wir nehmen internal, falls du es nur im Heimnetz willst
       namespace: network
   hostnames:
     - longhorn.schloschi.com
