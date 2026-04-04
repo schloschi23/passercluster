@@ -2,22 +2,41 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: longhorn
-  namespace: storage # Vorher Namespace erstellen!
+  namespace: storage
 spec:
   interval: 30m
   chart:
     spec:
       chart: longhorn
-      version: 1.7.2 # Aktuelle Version prüfen
+      version: 1.11.1 # Deine gewünschte Version
       sourceRef:
         kind: HelmRepository
         name: longhorn
         namespace: flux-system
   install:
-    remediation:
-      retries: 3
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     defaultSettings:
-      # Da du separate Disks gemountet hast (z.B. /var/mnt/backup-disk-01)
-      # kannst du Longhorn sagen, wo es seine Daten ablegen soll
+      # Nutzt deine 4TB Platte auf Node .203
       defaultDataPath: /var/mnt/backup-disk-01
+      # Verhindert, dass Longhorn versucht, auf den kleinen Laptop-Systemplatten zu speichern
+      createDefaultDiskWithNodeLabeled: true
+      # Wichtig für Talos: CSI-Komponenten müssen wissen, wo Kubelet liegt
+      kubeletRootDir: /var/lib/kubelet
+
+    # Ressourcen-Optimierung für ältere Hardware (Laptops)
+    longhornManager:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+
+    # Ingress für dein Cloudflare-Setup
+    ingress:
+      enabled: true
+      ingressClassName: internal # Nutzt deinen Envoy/Gateway
+      host: longhorn.schloschi.com
+      tls: true
+      tlsSecret: schloschi-com-production-tls

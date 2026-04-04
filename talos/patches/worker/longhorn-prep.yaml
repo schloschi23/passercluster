@@ -1,0 +1,6 @@
+# talos/patches/worker/longhorn-prep.yaml
+machine:
+  kernel:
+    modules:
+      - name: iscsi_tcp
+      - name: dm_crypt
