@@ -1,0 +1,27 @@
+# talos/patches/worker/backup-disks.yaml
+machine:
+  disks:
+    - device: /dev/sdf
+      partitions:
+        - mountpoint: /var/mnt/backup-disk-01
+          size: 0 # Use the full disk
+    - device: /dev/sdg
+      partitions:
+        - mountpoint: /var/mnt/backup-disk-02
+          size: 0 # Use the full disk
+  kubelet:
+    extraMounts:
+      - destination: /var/mnt/backup-disk-01
+        type: bind
+        source: /var/mnt/backup-disk-01
+        options:
+          - bind
+          - rshared
+          - rw
+      - destination: /var/mnt/backup-disk-02
+        type: bind
+        source: /var/mnt/backup-disk-02
+        options:
+          - bind
+          - rshared
+          - rw
