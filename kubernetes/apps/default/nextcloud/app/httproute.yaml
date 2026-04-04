@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: nextcloud-external
+  namespace: default
+spec:
+  parentRefs:
+    - name: envoy-external
+      namespace: network
+      sectionName: https
+  hostnames:
+    - "nextcloud.schloschi.com" # <-- Replace with your actual external domain
+  rules:
+    - backendRefs:
+        - name: nextcloud
+          port: 8080 # The default port for the Nextcloud service

@@ -13,12 +13,7 @@ spec:
         name: nextcloud
   values:
     ingress:
-      enabled: true
-      className: "HTTPRoute" # Adjust to your ingress controller (e.g. gateway api, traefik, or nginx)
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-production" # Assuming you use cert-manager
-      path: /
-      pathType: Prefix
+      enabled: false
 
     # Core Nextcloud configurations
     nextcloud:

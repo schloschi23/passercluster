@@ -19,8 +19,6 @@ spec:
           env:
             - name: POSTGRES_USER
               value: "immich"
-            - name: POSTGRES_PASSWORD
-              value: "immich-secret"
             - name: POSTGRES_DB
               value: "immich"
             - name: PGDATA
