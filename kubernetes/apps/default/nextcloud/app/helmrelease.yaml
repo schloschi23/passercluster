@@ -38,8 +38,7 @@ spec:
       enabled: true
       image:
         registry: docker.io
-        repository: bitnami/mariadb
-        tag: "11.2"
+        repository: bitnamilegacy/mariadb
       primary:
         persistence:
           enabled: true
@@ -50,5 +49,4 @@ spec:
       enabled: true
       image:
         registry: docker.io
-        repository: bitnami/redis
-        tag: "7.2"
+        repository: bitnamilegacy/redis
