@@ -4,5 +4,7 @@ resources:
   - ./helmrepository.yaml
   - ./helmrelease.yaml
   - ./pvc.yaml
+  - ./redis.yaml
+  - ./postgres.yaml
   - ./immich-external.yaml
   - ./immich-internal.yaml
