@@ -11,19 +11,22 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: immich
-  values:
-    # Use envFrom to securely load the password from our new secret
-    envFrom:
-      - secretRef:
-          name: immich-db-secret
 
+  values:
+  values:
+    # 2. Update your env block to pull the secret:
     env:
       DB_HOSTNAME: "immich-postgresql"
       DB_USERNAME: "immich"
-      # REMOVED DB_PASSWORD from here!
       DB_DATABASE_NAME: "immich"
       REDIS_HOSTNAME: "immich-redis-master"
       IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"
+      # Add the password back, securely referencing the secret:
+      DB_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: immich-db-secret
+            key: DB_PASSWORD
 
     ingress:
       main:
