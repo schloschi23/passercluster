@@ -1,0 +1,30 @@
+---
+# Internal Wildcard (Self-Signed)
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: passer-internal-tls
+spec:
+  secretName: passer-internal-tls
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  commonName: "passer.internal"
+  dnsNames:
+    - "passer.internal"
+    - "*.passer.internal"
+---
+# External Wildcard (Let's Encrypt via Cloudflare)
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: schloschi-com-tls
+spec:
+  secretName: schloschi-com-tls
+  issuerRef:
+    name: letsencrypt-production # Uses your existing Cloudflare issuer
+    kind: ClusterIssuer
+  commonName: "schloschi.com"
+  dnsNames:
+    - "schloschi.com"
+    - "*.schloschi.com"

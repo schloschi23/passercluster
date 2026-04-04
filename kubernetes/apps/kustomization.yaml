@@ -8,3 +8,4 @@ resources:
   - kube-system
   - network
   - storage
+  - certificate-schloschi

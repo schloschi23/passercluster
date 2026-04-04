@@ -1,14 +1,29 @@
+---
+# External Access
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: immich
+  name: immich-external
 spec:
   parentRefs:
     - name: envoy-external
       namespace: network
-      sectionName: https
-  hostnames:
-    - "immich.${SECRET_DOMAIN}"
+  hostnames: ["immich.schloschi.com"]
+  rules:
+    - backendRefs:
+        - name: immich-server
+          port: 2283
+---
+# Internal Access
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: immich-internal
+spec:
+  parentRefs:
+    - name: envoy-internal
+      namespace: network
+  hostnames: ["immich.passer.internal"]
   rules:
     - backendRefs:
         - name: immich-server
