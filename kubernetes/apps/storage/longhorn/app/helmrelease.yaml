@@ -8,11 +8,11 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: 1.11.1 # Deine gewünschte Version
+      version: 1.11.1
       sourceRef:
         kind: HelmRepository
         name: longhorn
-        namespace: flux-system
+        namespace: storage
   install:
     crds: CreateReplace
   upgrade:
