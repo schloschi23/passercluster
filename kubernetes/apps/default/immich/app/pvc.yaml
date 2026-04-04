@@ -1,11 +1,12 @@
+# kubernetes/apps/default/immich/app/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: immich-library-pvc
-  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: longhorn-single # Point to the new StorageClass
   resources:
     requests:
-      storage: 1200Gi
+      storage: 990Gi

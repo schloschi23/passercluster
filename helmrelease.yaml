@@ -12,7 +12,11 @@ spec:
         kind: HelmRepository
         name: immich
   values:
-    # Disable traditional Ingress in favor of Gateway API HTTPRoute
+    defaultSettings:
+      defaultDataPath: /var/lib/longhorn
+      createDefaultDiskWithNodeLabeled: true
+      kubeletRootDir: /var/lib/kubelet
+      defaultReplicaCount: 1
     ingress:
       main:
         enabled: false
