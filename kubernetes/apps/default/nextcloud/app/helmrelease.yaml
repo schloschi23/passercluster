@@ -12,10 +12,16 @@ spec:
         kind: HelmRepository
         name: nextcloud
   values:
+  values:
+    # These must be right here, at the top level of values!
+    livenessProbe:
+      initialDelaySeconds: 300
+    readinessProbe:
+      initialDelaySeconds: 300
+
     ingress:
       enabled: false
 
-    # Core Nextcloud configurations
     nextcloud:
       host: "nextcloud.yourdomain.com"
       # REMOVE username and password here
