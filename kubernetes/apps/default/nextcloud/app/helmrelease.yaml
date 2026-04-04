@@ -14,7 +14,7 @@ spec:
   values:
     ingress:
       enabled: true
-      className: "nginx" # Adjust to your ingress controller (e.g. gateway api, traefik, or nginx)
+      className: "HTTPRoute" # Adjust to your ingress controller (e.g. gateway api, traefik, or nginx)
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-production" # Assuming you use cert-manager
       path: /
@@ -23,23 +23,37 @@ spec:
     # Core Nextcloud configurations
     nextcloud:
       host: "nextcloud.yourdomain.com"
-      username: "admin"
-      password: "change-this-password" # Best practice: use Flux substitution like ${NEXTCLOUD_ADMIN_PASSWORD}
+      # REMOVE username and password here
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-admin-secret
+        usernameKey: nextcloud-username
+        passwordKey: nextcloud-password
+
+
 
     # Storage for user data
     persistence:
       enabled: true
-      existingClaim: "" # Or provide an existing PVC name like you did with immich-library-pvc
-      size: 50Gi
+      existingClaim: ""
+      size: 1200Gi
 
-    # Database configuration (defaults to a built-in MariaDB pod)
+    # Update MariaDB block
     mariadb:
       enabled: true
+      image:
+        registry: docker.io
+        repository: bitnami/mariadb
+        tag: "11.2"
       primary:
         persistence:
           enabled: true
           size: 8Gi
 
-    # Optionally enable redis for caching
+    # Update Redis block
     redis:
       enabled: true
+      image:
+        registry: docker.io
+        repository: bitnami/redis
+        tag: "7.2"

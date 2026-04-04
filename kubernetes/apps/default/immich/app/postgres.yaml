@@ -25,6 +25,12 @@ spec:
               value: "immich"
             - name: PGDATA
               value: "/var/lib/postgresql/data/pgdata"
+            # Replace the plaintext password with this secure reference:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich-db-secret
+                  key: POSTGRES_PASSWORD
           ports:
             - containerPort: 5432
           volumeMounts:

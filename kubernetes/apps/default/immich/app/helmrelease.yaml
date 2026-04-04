@@ -7,18 +7,24 @@ spec:
   chart:
     spec:
       chart: immich
-      version: "0.8.x" # You can pin a specific chart version
+      version: "0.8.x"
       sourceRef:
         kind: HelmRepository
         name: immich
   values:
+    # Use envFrom to securely load the password from our new secret
+    envFrom:
+      - secretRef:
+          name: immich-db-secret
+
     env:
       DB_HOSTNAME: "immich-postgresql"
       DB_USERNAME: "immich"
-      DB_PASSWORD: "immich-secret"
+      # REMOVED DB_PASSWORD from here!
       DB_DATABASE_NAME: "immich"
       REDIS_HOSTNAME: "immich-redis-master"
       IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"
+
     ingress:
       main:
         enabled: false
