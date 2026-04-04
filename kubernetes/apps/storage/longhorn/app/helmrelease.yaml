@@ -20,7 +20,8 @@ spec:
   values:
     defaultSettings:
       defaultDataPath: /var/lib/longhorn
-      createDefaultDiskWithNodeLabeled: true
+      createDefaultDiskWithNodeLabeled: false
+      defaultReplicaCount: 3
       kubeletRootDir: /var/lib/kubelet
 
     # Ressourcen-Optimierung für ältere Hardware (Laptops)

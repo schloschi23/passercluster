@@ -61,6 +61,13 @@ nodes:
       secureboot: false
     # talosImageURL: factory.talos.dev/installer/249d9135de54962744e917cfe654117000cba369f9152fbab9d055a00aa3664f
     controlPlane: false
+    patches:
+      - |-
+        machine:
+          disks:
+            - device: /dev/nvme0n1     # The 2.0 TB NVMe
+              partitions:
+                - mountpoint: /var/lib/longhorn
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "c4:65:16:38:81:d7"
@@ -80,6 +87,12 @@ nodes:
     controlPlane: false
     patches:
       - "@./patches/worker/backup-disks.yaml"
+      - |-
+        machine:
+          disks:
+            - device: /dev/sdf         # The first 4.0 TB HDD
+              partitions:
+                - mountpoint: /var/lib/longhorn
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "74:46:a0:b1:0b:de"
