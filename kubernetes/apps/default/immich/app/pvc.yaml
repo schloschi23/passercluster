@@ -9,4 +9,4 @@ spec:
   storageClassName: longhorn-single # Point to the new StorageClass
   resources:
     requests:
-      storage: 990Gi
+      storage: 900Gi
