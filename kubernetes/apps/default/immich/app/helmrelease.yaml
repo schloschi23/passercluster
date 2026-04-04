@@ -12,14 +12,13 @@ spec:
         kind: HelmRepository
         name: immich
   values:
-    # Disable traditional Ingress in favor of Gateway API HTTPRoute
     ingress:
       main:
         enabled: false
 
-    # Example values (adjust to your persistence needs)
     immich:
       persistence:
         library:
-          existingClaim: "" # Leave empty to auto-provision, or add your PVC name
+          existingClaim: ""
           size: 50Gi
+          accessMode: ReadWriteOnce
