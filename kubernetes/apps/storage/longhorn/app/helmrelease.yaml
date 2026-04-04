@@ -19,11 +19,8 @@ spec:
     crds: CreateReplace
   values:
     defaultSettings:
-      # Nutzt deine 4TB Platte auf Node .203
-      defaultDataPath: /var/mnt/backup-disk-01
-      # Verhindert, dass Longhorn versucht, auf den kleinen Laptop-Systemplatten zu speichern
+      defaultDataPath: /var/lib/longhorn
       createDefaultDiskWithNodeLabeled: true
-      # Wichtig für Talos: CSI-Komponenten müssen wissen, wo Kubelet liegt
       kubeletRootDir: /var/lib/kubelet
 
     # Ressourcen-Optimierung für ältere Hardware (Laptops)
