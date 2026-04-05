@@ -50,6 +50,8 @@ spec:
 # Update PostgreSQL block
     postgresql:
       enabled: true
+      image:
+        tag: "16" # <-- Add this back
       primary:
         persistence:
           enabled: true
@@ -58,3 +60,5 @@ spec:
     # Update Redis block
     redis:
       enabled: true
+      image:
+        tag: "7.2" # <-- Add this back
