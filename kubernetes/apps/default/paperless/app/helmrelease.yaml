@@ -47,18 +47,22 @@ spec:
         size: 5Gi
         accessMode: ReadWriteOnce
 
-# Update PostgreSQL block
+# Explicitly override the missing PostgreSQL tags
     postgresql:
       enabled: true
       image:
-        tag: "16" # <-- Add this back
+        registry: docker.io
+        repository: bitnami/postgresql
+        tag: 16.2.0-debian-12-r5 # Explicitly use a known, working debian-12 tag
       primary:
         persistence:
           enabled: true
           size: 10Gi
 
-    # Update Redis block
+    # Explicitly override the missing Redis tags
     redis:
       enabled: true
       image:
-        tag: "7.2" # <-- Add this back
+        registry: docker.io
+        repository: bitnami/redis
+        tag: 7.2.4-debian-12-r6 # Explicitly use a known, working debian-12 tag
