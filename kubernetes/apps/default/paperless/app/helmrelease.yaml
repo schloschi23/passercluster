@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: paperless-ngx
-      version: ">=0.26.0" # You can pin to a specific chart version, check for latest
+      version: ">=0.24.x" # You can pin to a specific chart version, check for latest
       sourceRef:
         kind: HelmRepository
         name: paperless
