@@ -53,7 +53,7 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/postgresql
-        tag: 16.2.0-debian-12-r5 # Explicitly use a known, working debian-12 tag
+        tag: 16.2.0-debian-12-r5
       primary:
         persistence:
           enabled: true
@@ -65,4 +65,4 @@ spec:
       image:
         registry: docker.io
         repository: bitnami/redis
-        tag: 7.2.4-debian-12-r6 # Explicitly use a known, working debian-12 tag
+        tag: 7.2.4-debian-12-r6
