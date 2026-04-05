@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: paperless-ngx
-      version: "0.24.x" # You can pin to a specific chart version, check for latest
+      version: ">=0.26.0" # You can pin to a specific chart version, check for latest
       sourceRef:
         kind: HelmRepository
         name: paperless
@@ -50,8 +50,6 @@ spec:
 # Update PostgreSQL block
     postgresql:
       enabled: true
-      image:
-        tag: "16" # <-- Forces pulling the rolling v16 image
       primary:
         persistence:
           enabled: true
@@ -60,5 +58,3 @@ spec:
     # Update Redis block
     redis:
       enabled: true
-      image:
-        tag: "7.2" # <-- Forces pulling the rolling v7.2 image
