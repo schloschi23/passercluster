@@ -47,14 +47,18 @@ spec:
         size: 5Gi
         accessMode: ReadWriteOnce
 
-    # Update PostgreSQL block (Recommended database for Paperless-ngx)
+# Update PostgreSQL block
     postgresql:
       enabled: true
+      image:
+        tag: "16" # <-- Forces pulling the rolling v16 image
       primary:
         persistence:
           enabled: true
           size: 10Gi
 
-    # Update Redis block (Required broker for Paperless-ngx)
+    # Update Redis block
     redis:
       enabled: true
+      image:
+        tag: "7.2" # <-- Forces pulling the rolling v7.2 image
