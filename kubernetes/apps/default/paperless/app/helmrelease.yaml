@@ -1,0 +1,55 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: paperless
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: paperless-ngx
+      version: "0.24.x" # You can pin to a specific chart version, check for latest
+      sourceRef:
+        kind: HelmRepository
+        name: paperless
+  values:
+    # Disable default ingress as we are using HTTPRoute
+    ingress:
+      main:
+        enabled: false
+
+    # Link our SOPS secret to automatically generate the initial admin user and pass
+    envFrom:
+      - secretRef:
+          name: paperless-admin-secret
+
+    # Essential Paperless Environment Variables
+    env:
+      TZ: "UTC" # Change to your timezone (e.g., Europe/Berlin)
+      PAPERLESS_URL: "https://paperless.schloschi.com" # Matches your external domain
+
+    # Storage configuration for user data, media, and drop-in consumption
+    persistence:
+      data:
+        enabled: true
+        size: 10Gi
+      media:
+        enabled: true
+        size: 40Gi
+      consume:
+        enabled: true
+        size: 20Gi
+      export:
+        enabled: true
+        size: 20Gi
+
+    # Update PostgreSQL block (Recommended database for Paperless-ngx)
+    postgresql:
+      enabled: true
+      primary:
+        persistence:
+          enabled: true
+          size: 10Gi
+
+    # Update Redis block (Required broker for Paperless-ngx)
+    redis:
+      enabled: true
