@@ -12,7 +12,6 @@ spec:
         kind: HelmRepository
         name: nextcloud
   values:
-  values:
     # These must be right here, at the top level of values!
     livenessProbe:
       initialDelaySeconds: 300
@@ -37,7 +36,7 @@ spec:
     persistence:
       enabled: true
       existingClaim: ""
-      size: 1200Gi
+      size: 200Gi
 
     # Update MariaDB block
     mariadb:
